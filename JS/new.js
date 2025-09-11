@@ -56,30 +56,32 @@
 // login();
 // getdata();
 
-function register() {
-    setTimeout(()=>{
-        console.log("register end");
-    },2000);
-}
-function sendemail() {
-    setTimeout(()=>{
-        console.log("email sent");
-    },3000);
-}
-function login() {
-    setTimeout(()=>{
-        console.log("login");
-    },1000);
-}
-function getdata() {
-    setTimeout(()=>{
-        console.log("getdata");
-    },4000);
-}
-register();
-sendemail();
-login();
-getdata();
+// function register() {
+//     setTimeout(()=>{
+//         console.log("register end");
+//     },2000);
+// }
+// function sendemail() {
+//     setTimeout(()=>{
+//         console.log("email sent");
+//     },3000);
+// }
+// function login() {
+//     setTimeout(()=>{
+//         console.log("login");
+//     },1000);
+// }
+// function getdata() {
+//     setTimeout(()=>{
+//         console.log("getdata");
+//     },4000);
+// }
+// register();
+// sendemail();
+// login();
+// getdata();
+
+
 
 
 
