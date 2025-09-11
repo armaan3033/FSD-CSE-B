@@ -30,31 +30,58 @@
 // });
 
 //Asynchronus Programming
+// function register() {
+//     wait2seconds();
+//     console.log("register end");
+// }
+// function sendemail() {
+//     wait2seconds();
+//     console.log("email sent");
+// }
+// function login() {
+//     wait2seconds();
+//     console.log("login");
+// }
+// function getdata() {
+//     wait2seconds();
+//     console.log("getdata");
+// }
+// function wait2seconds() {
+//     let ms=2000+new Date().getTime();
+//     while(new Date().getTime()<ms){}
+//     console.log("waited 2 seconds");
+// }
+// register();
+// sendemail();
+// login();
+// getdata();
+
 function register() {
-    wait2seconds();
-    console.log("register end");
+    setTimeout(()=>{
+        console.log("register end");
+    },2000);
 }
 function sendemail() {
-    wait2seconds();
-    console.log("email sent");
+    setTimeout(()=>{
+        console.log("email sent");
+    },3000);
 }
 function login() {
-    wait2seconds();
-    console.log("login");
+    setTimeout(()=>{
+        console.log("login");
+    },1000);
 }
 function getdata() {
-    wait2seconds();
-    console.log("getdata");
-}
-function wait2seconds() {
-    let ms=2000+new Date().getTime();
-    while(new Date().getTime()<ms){}
-    console.log("waited 2 seconds");
+    setTimeout(()=>{
+        console.log("getdata");
+    },4000);
 }
 register();
 sendemail();
 login();
 getdata();
+
+
 
 
 
