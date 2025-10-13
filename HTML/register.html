@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+</head>
+<body>
+    <h1>Register Here!</h1>
+    <form name="register" method="post" action="/register">
+      <label for="name">Full Name:</label><br>
+      <input type="text" id="name" placeholder="Full Name" required><br><br>
+
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" placeholder="Email" required><br><br>
+
+      <!-- Mobile Number -->
+    <label for="mobile">Mobile Number:</label><br>
+    <input type="tel" id="mobile" placeholder="10-digit Mobile Number" pattern="[0-9]{10}" required><br><br>
+
+    <!-- Date of Birth -->
+    <label for="dob">Date of Birth:</label><br>
+    <input type="date" id="dob" required><br><br>
+
+    <!-- Gender -->
+    <label>Gender:</label><br>
+    <input type="radio" id="male" name="gender" value="Male" required>
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="gender" value="Female">
+    <label for="female">Female</label>
+    <input type="radio" id="other" name="gender" value="Other">
+    <label for="other">Other</label><br><br>
+
+    <!-- Branch -->
+    <label for="branch">Branch:</label><br>
+    <select id="branch" required>
+      <option value="">--Select Branch--</option>
+      <option value="CSE">Computer Science & Engineering</option>
+      <option value="ECE">Electronics & Communication</option>
+      <option value="ME">Mechanical Engineering</option>
+      <option value="CE">Civil Engineering</option>
+      <option value="IT">Information Technology</option>
+    </select><br><br>
+    <label for="semester">Semester:</label><br>
+    <select id="semester" required>
+      <option value="">--Select Semester--</option>
+      <option value="1">1st</option>
+      <option value="2">2nd</option>
+      <option value="3">3rd</option>
+      <option value="4">4th</option>
+      <option value="5">5th</option>
+      <option value="6">6th</option>
+      <option value="7">7th</option>
+      <option value="8">8th</option>
+    </select><br><br>
+
+
+      <label for="certificate">Upload Class 12 Certificate:</label><br>
+      <input type="file" id="certificate" name="certificate" accept=".pdf,.jpg,.jpeg,.png" required><br><br>
+
+
+
+      <div class="error" id="errorMsg"></div><br>
+      <button type="submit">Sign Up</button>
+    </form>
+
+</body>
+</html>
