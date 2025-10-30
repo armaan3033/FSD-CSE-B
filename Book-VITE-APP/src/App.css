@@ -1,0 +1,11 @@
+.card{
+  width: 400px;
+  height: 400px;
+  background-color: rgb(17, 40, 60);
+  color: aliceblue;
+  border: 5px solid blue;
+  border-radius: 10px;
+  margin: auto;
+  text-align: center;
+  
+}
