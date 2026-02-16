@@ -1,39 +1,40 @@
-import http from "http";
+import http from 'http'
+import os from 'os'   
+
 const server = http.createServer((req, res) => {
-    const url = req.url;
-    const data={
-        name:"XYZ",
-        rollno:"123"
+    const url = req.url
+    const method = req.method
+
+    if (url == "/" && method == "GET") {
+        res.end("Home Page")
     }
-    if (url === "/") {
-        res.write("Home Page");
+    else if (url == "/contact" && method == "GET") {
+        res.end("Contact Page")
     }
-    else if (url === "/about") {
-        res.write("About Page"); 
-    }
-    else if (url === "/data") {
-        res.write(JSON.stringify(data));
-    }
-    else if (url === "/contact") {
-        res.write("Contact Page");
-    }
-    else if (url == "/system" && req.method=="GET"){
-        const sysdata={
+    else if (url == "/system" && method == "GET") {
+        const sysdata = {
             platform: os.platform(),
-            arch: os.platform(),
-            cpu: os.cpus().length,
-            totalRam: (os.totalmem()/1024**3).toFixed(2) + "GB",
-            freerem: (os.freemem()/1024**3).toFixed(2)+ "GB"
+            architecture: os.arch(),
+            cpu_length: os.cpus().length,
+            TotalMemory: os.totalmem()/1024**3+" GB",
+            FreeMemory: os.freemem()/1024**3+" GB"
         }
-    res.setHeader("Content-Type",)
+        res.end(JSON.stringify(sysdata))
     }
-    else {
-        res.write("Page Not Found");
+    else if (url == "/senddata" && method == "POST") {
+        let body = ""
+        req.on("data", (chunk) => {
+            body = body + chunk
+        })
+        req.on("end", () => {
+            console.log(body, "Data added successfully")
+            res.end(body)
+        })
     }
-    res.end();
-}
-);
-server.listen(4000, () => {
-    console.log("Server is running on port 4000");
-}
-);
+    else{
+        res.end("error page")
+    }
+})
+server.listen(5001, () => {
+    console.log("Server is running on port 5001")
+})
