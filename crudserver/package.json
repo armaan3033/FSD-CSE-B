@@ -1,0 +1,14 @@
+{
+  "name": "crudserver",
+  "version": "1.0.0",
+  "main": "crudserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node crudserver.js",
+    "dev":"nodemon cruderver.js"
+  },
+  "author": "",
+  "type":"module",
+  "license": "ISC",
+  "description": ""
+}
