@@ -1,60 +1,85 @@
-import http from 'http'
-const port=5000;
-const users=[{id:1,name:'ABC',email:"abc@gmail.com"},
-            {id:2,name:'XYZ',email:"xyz@gmail.com"}
-]
-const server=http.createServer((req, res)=>{
-    const url= req.url;
-    const method=req.method
-    if (url=="/" && method=="GET"){
-        res.end("Home Page");
+import http from "http";
+const port=5001;
+const users=[];
+const server=http.createServer((req,res)=>{
+const url=req.url;
+const method=req.method;
+if(url=="/users" && method=="GET"){
+    res.end(JSON.stringify(users))
+}
+else if(url.startsWith("/users/") && method=="GET"){
+    const id=url.split("/")[2];
+    const user=users.find(u=>u.id==id);
+    if(!user){
+        res.statusCode=400;
+        console.log(user id ${id} not found)
+        return res.end(user id ${id} not found)
     }
-    else if(url=="/users"&& method =="GET"){
-        res.end(JSON.stringify(users));
-    }
-    else if(url.startsWith("/users/")&& method =="GET"){
-        const id=url.split("/")[2];
-        const user=users.find(u=>u.id==id);
-        if(!user){
-            res.statusCode=400;
-            res.end("User not found");
-        }
-    }
-    else if(url=="/createusers"&& method =="POST"){
-        let body="";
+    console.log(user id ${id} found)
+    res.end(JSON.stringify(user))
+}
+else if(url.startsWith("/users/") && method=="PUT"){
+   const id=url.split("/")[2];
+   let body="";
+   req.on("data",(chunk)=>{
+    body=body+chunk;
+   })
+   req.on("end",()=>{
+    const userIndex=users.findIndex(u=>u.id==id);
+   if(userIndex==-1){
+    res.statusCode=400;
+    console.log(user id ${id} not found)
+    return res.end(user id ${id} not found)
+   }
+   const updateddata=JSON.parse(body);
+   users[userIndex]={...users[userIndex],...updateddata};
+   console.log(user id ${id} updated successfully)
+   res.end(user id ${id} updated successfully)
+   })
+   
+}
 
-        res.on("data",(chunk)=>{
-            body=body+chunk;
-        })
-        req.on("end",()=>{
-            const data=JSON.parse(body);
-            const newUser={
-                id:Date.now(),
-                name:data.name,
-            }
-            if (data.name==null && data.email==null){
-                res.statusCode=400;
-                res.end(`User id ${newUser.id}  `);
-                
-            }
-            
-        })
-        
+else if(url.startsWith("/users/") && method=="DELETE"){
+    const id=url.split("/")[2];
+    const userIndex=users.findIndex(u=>u.id==id);
+    if(userIndex==-1){
+        res.statusCode=400;
+        console.log(user id ${id} not found);
+        return res.end(user id ${id} not found)
     }
-    else if(url.startsWith("/users/")&& method =="GET"){
-        res.end("Edit user");
-    }
-    else if(url.startsWith("/users/")&& method =="PUT"){
-        res.end("writing");
-    }
-    else if(url.startsWith("/users/")&& method =="DELETE"){
-        res.end("Deleting");
-    }
-    else{
-        res.statusCode=404;
-        res.end("Error Page")
-    }
+    users.splice(userIndex,1);
+    console.log(user id ${id} deleted successfully)
+    res.end(user id ${id} deleted successfully)
+}
+else if(url=="/createuser" && method=="POST"){
+    let body="";
+    req.on("data",(chunk)=>{
+     body=body+chunk;
+    })
+    req.on("end",()=>{
+        const data=JSON.parse(body);
+         if(data.name==null || data.email==null){
+            res.statusCode=400;
+             return res.end(user name or email is empty)
+        }
+        const newUser={
+            id: Date.now(),
+            name: data.name,
+            email: data.email
+        }
+       
+        users.push(newUser);
+        res.statusCode=201;
+        console.log(user id ${newUser.id} created successfully)
+        res.end(user id ${newUser.id} created successfully)
+    })
+
+}
+else{
+    res.statusCode=404;
+    res.end("Error Page")
+}
 })
 server.listen(port,()=>{
-    console.log("server running on port "+ port)
+    console.log(Server is running on port ${port})
 })
